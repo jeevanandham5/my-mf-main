@@ -5,7 +5,8 @@ const path = require("path");
 
 module.exports = {
   entry: "./src/index.js",
-  mode: "development",
+  mode: "production",
+  //mode: "development",
   devServer: {
     static: path.join(__dirname, "public"),
     port: 3000,
@@ -13,8 +14,7 @@ module.exports = {
   },
   output: {
     publicPath: "/",
-    path: path.resolve(__dirname, "build"), // Set the output path to "build"
-    filename: "main.bundle.js",
+    path: path.resolve(__dirname, "build"),
   },
   module: {
     rules: [
@@ -59,10 +59,13 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "main",
       remotes: {
+        //shop: "shop@http://localhost:3001/bundle.js",
         //shop: "shop@http://localhost:3001/remoteEntry.js",
-        shop: "shop@https://my-mf-shop.vercel.app/",
+        shop: "shop@https://my-mf-shop.vercel.app/remoteEntry.js",
+        // dashboard: "dashboard@http://localhost:3002/bundle.js",
         //dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
-        dashboard:"dashboard@https://my-mf-dashboard.vercel.app/",
+        dashboard:
+          "dashboard@https://my-mf-dashboard.vercel.app/remoteEntry.js",
       },
       shared: {
         react: {
