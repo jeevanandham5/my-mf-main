@@ -13,6 +13,8 @@ module.exports = {
   },
   output: {
     publicPath: "/",
+    path: path.resolve(__dirname, "build"), // Set the output path to "build"
+    filename: "main.bundle.js",
   },
   module: {
     rules: [
