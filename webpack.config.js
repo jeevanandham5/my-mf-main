@@ -59,8 +59,10 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "main",
       remotes: {
-        shop: "shop@http://localhost:3001/remoteEntry.js",
-        dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
+        //shop: "shop@http://localhost:3001/remoteEntry.js",
+        shop: "shop@https://my-mf-shop.vercel.app/",
+        //dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
+        dashboard:"dashboard@https://my-mf-dashboard.vercel.app/",
       },
       shared: {
         react: {
