@@ -1,7 +1,14 @@
-.main {
-  background: #282c34;
+.header {
+  background: #162543;
   color: white;
-  width: 100%;
+  width: 100vw;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.container {
+  width: 100vw;
   height: 100vh;
   text-align: center;
   display: flex;
@@ -16,7 +23,7 @@
   background: #162543;
   width: 400px;
   height: 200px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;

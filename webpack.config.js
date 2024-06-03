@@ -60,6 +60,19 @@ module.exports = {
         shop: "shop@http://localhost:3001/remoteEntry.js",
         dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
       },
+      shared: {
+        react: {
+          singleton: true,
+
+          requiredVersion: require("./package.json").dependencies.react,
+        },
+        "react-dom": {
+          singleton: true,
+
+          requiredVersion: require("./package.json").dependencies["react-dom"],
+        },
+      },
     }),
   ],
+  stats: "verbose",
 };
