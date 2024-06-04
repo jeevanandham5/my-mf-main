@@ -12,9 +12,6 @@ const ShopApp = lazy(() => {
   return import("shop/ShopApp").catch(() => fallback);
 });
 
-const MyDashboard = lazy(() =>
-  import("dashboard/myDashboard").catch(() => fallback)
-);
 const DashboardApp = lazy(() => {
   return import("dashboard/DashboardApp").catch(() => fallback);
 });
@@ -25,7 +22,7 @@ function App() {
   const isActive = (path) => {
     return location.pathname.startsWith(path);
   };
-
+  console.log(location.pathname);
   return (
     <div className={Styles.main}>
       <header className={Styles.header}>
@@ -83,22 +80,35 @@ function App() {
                     path="/"
                     element={<Main mycount={mycount} setMycount={setMycount} />}
                   />
-                  <Route
-                    path="/dashboard"
-                    element={
-                      <DashboardApp
-                        userName={"jeevanandham"}
-                        mycount={mycount}
-                        setMycount={setMycount}
-                      />
-                    }
-                  />
-
                   <Route path="/shop" element={<ShopApp count={mycount} />} />
-                  <Route
+                  <Route path="/dashboard">
+                    <Route
+                      index
+                      element={
+                        <DashboardApp
+                          userName={"jeevanandham"}
+                          mycount={mycount}
+                          setMycount={setMycount}
+                          currentPath={location.pathname}
+                        />
+                      }
+                    />
+                    <Route
+                      path="*"
+                      element={
+                        <DashboardApp
+                          userName={"jeevanandham"}
+                          mycount={mycount}
+                          setMycount={setMycount}
+                          currentPath={location.pathname}
+                        />
+                      }
+                    />
+                  </Route>
+                  {/*<Route
                     path="*"
                     element={<Main mycount={mycount} setMycount={setMycount} />}
-                  />
+                  />*/}
                 </Routes>
               </ErrorBoundary>
             </Suspense>

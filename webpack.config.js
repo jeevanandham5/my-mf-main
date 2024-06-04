@@ -8,7 +8,7 @@ module.exports = {
   mode: "production",
   //mode: "development",
   devServer: {
-    static: path.join(__dirname, "public"),
+    static: { directory: path.join(__dirname, "public") },
     port: 3000,
     historyApiFallback: true,
   },
@@ -59,13 +59,11 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "main",
       remotes: {
-        //shop: "shop@http://localhost:3001/bundle.js",
         //shop: "shop@http://localhost:3001/remoteEntry.js",
         shop: "shop@https://my-mf-shop.vercel.app/remoteEntry.js",
-        // dashboard: "dashboard@http://localhost:3002/bundle.js",
-        //dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
         dashboard:
           "dashboard@https://my-mf-dashboard.vercel.app/remoteEntry.js",
+        //dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
       },
       shared: {
         react: {
