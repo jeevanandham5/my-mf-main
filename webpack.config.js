@@ -3,11 +3,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-
+const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
   entry: "./src/index.js",
-  //mode: "production",
-  mode: "development",
+  mode: isProduction ? "production" : "development",
   devServer: {
     static: { directory: path.join(__dirname, "public") },
     port: 3000,
@@ -60,10 +59,12 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "main",
       remotes: {
-        //shop: "shop@http://localhost:3001/remoteEntry.js",
-        shop: "shop@https://my-mf-shop.vercel.app/remoteEntry.js",
-        //dashboard:"dashboard@https://my-mf-dashboard.vercel.app/remoteEntry.js",
-        dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
+        shop: isProduction
+          ? "shop@https://my-mf-shop.vercel.app/remoteEntry.js"
+          : "shop@http://localhost:3001/remoteEntry.js",
+        dashboard: isProduction
+          ? "dashboard@https://my-mf-dashboard.vercel.app/remoteEntry.js"
+          : "dashboard@http://localhost:3002/remoteEntry.js",
       },
       shared: {
         react: {
