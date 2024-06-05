@@ -2,11 +2,12 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const path = require("path");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 module.exports = {
   entry: "./src/index.js",
-  mode: "production",
-  //mode: "development",
+  //mode: "production",
+  mode: "development",
   devServer: {
     static: { directory: path.join(__dirname, "public") },
     port: 3000,
@@ -61,9 +62,8 @@ module.exports = {
       remotes: {
         //shop: "shop@http://localhost:3001/remoteEntry.js",
         shop: "shop@https://my-mf-shop.vercel.app/remoteEntry.js",
-        dashboard:
-          "dashboard@https://my-mf-dashboard.vercel.app/remoteEntry.js",
-        //dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
+        //dashboard:"dashboard@https://my-mf-dashboard.vercel.app/remoteEntry.js",
+        dashboard: "dashboard@http://localhost:3002/remoteEntry.js",
       },
       shared: {
         react: {
@@ -77,6 +77,9 @@ module.exports = {
           requiredVersion: require("./package.json").dependencies["react-dom"],
         },
       },
+    }),
+    new WebpackManifestPlugin({
+      fileName: "asset-manifest.json",
     }),
   ],
   stats: "verbose",
