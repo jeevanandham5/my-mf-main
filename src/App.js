@@ -22,7 +22,7 @@ function App() {
   const isActive = (path) => {
     return location.pathname.startsWith(path);
   };
-  console.log(location.pathname);
+
   return (
     <div className={Styles.main}>
       <header className={Styles.header}>
