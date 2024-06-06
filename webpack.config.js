@@ -31,14 +31,11 @@ const appMetadata = {
 };
 module.exports = {
   entry: "./src/index.js",
-  mode: isProduction ? "production" : "development",
+  mode: "development",
   devServer: {
     static: { directory: path.join(__dirname, "public") },
     port: 3000,
     historyApiFallback: true,
-    headers: {
-      "Content-Type": "application/manifest+json",
-    },
   },
   output: {
     publicPath: "/",
